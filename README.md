@@ -13,7 +13,10 @@ In case one is confronted with a responsive USB connection, but the USB is not e
 The user should also exclude the possiblity of a malfunctioning USB driver.
 
 The use of this manual is to the descretion of the user and to its liability only.
+(what can happen right? Even not magic smoke...)
 
 That said, let get hacking!
 
 The step-by-step manual can be found on the github page with this readme file.
+
+ Have fun!
