@@ -13,11 +13,13 @@ The below TIP!'s are following Adafruit's guide. So I advise to read this tips h
           PDF print of the webpage is available on the github.
           (Thanks to GoJimmyPI for his contribution)
       TIP! The wiring shown for the PI2 is the same for the PI3
-      TIP! The manual states alternatively to power the board via the raspberry. I tried both and preferred to power over USB as noticed that connection was sometime lost powering the MKR board.
+      TIP! The manual states alternatively to power the board via the raspberry. 
+            I tried both and preferred to power over USB as noticed that connection was sometime lost powering the MKR board.
       TIP! Have left a picture of the wiring on the Github
   > Create OpenOCD config
       TIP! Have left my OpenOCD.cfg file on this Github.
-      TIP! Although i have changed the adapter_nsrst delay and assert, I don't think it has much impact on succesfull loading. (in my case)
+      TIP! Although i have changed the adapter_nsrst delay and assert, I don't think it has much impact on succesfull loading. 
+           (in my case)
       TIP! I have entered the bcm2835gpio_swd/trst/srst pin numbering, as without it didn't work for me.
       TIP! As an unexperienced Linux user, i have replaced all the [find xxxxxxxx] items with absolute full path names
       TIP! I have not commented out the srst_nogate and had no issues.
@@ -43,11 +45,16 @@ The below TIP!'s are following Adafruit's guide. So I advise to read this tips h
       TIP! get the latest bootloader files from the Github site: 
           https://github.com/arduino/ArduinoCore-samd (for Arduino boards).
           (Thanks Arduino for support and sharing! That shows the added value of genuine boards!)
-      TIP! i got the latest bootloader file on my PI3 by typing into the command line: wget https://github.com/arduino/ArduinoCore-samd\https://github.com/arduino/ArduinoCore-samd/tree/master/bootloaders/mkrwifi1010/samd21_sam_ba_arduino_mkrwifi1010.bin
-          HOWEVER, this was a mistake!! As you will notice the bootloaders are 8192byte (exactly the bootloader size). Using the wget function I got a 64kb file downloaded!! 
+      TIP! i got the latest bootloader file on my PI3 by typing into the command line: 
+            wget https://github.com/arduino/ArduinoCore-samd/tree/master/bootloaders/mkrwifi1010/samd21_sam_ba_arduino_mkrwifi1010.bin
+          HOWEVER, this was a mistake!! 
+          As you will notice the bootloaders are 8192byte (exactly the bootloader size). 
+          Using the wget function I got a 64kb file downloaded!! 
           > After a lot of hours searching I found out the wget will corrupt the bootloader file.
-          > Therefore download the bootloader on your PC and transfer the file to the PI using ftp or in my case, PuTTY SCP (file transfer over SSH)
-      TIP! I left a working bootloader (samd21_2020.bin) in the Github but I strongly advise to download the latest from the official Github 
+          > Therefore download the bootloader on your PC and transfer the file to the PI using ftp or in my case, 
+            PuTTY SCP (file transfer over SSH)
+      TIP! I left a working bootloader (samd21_2020.bin) in the Github but 
+           I strongly advise to download the latest from the official Github 
       TIP!  reset:                      resets the board
             halt:                       halts the board
             at91samd bootloader 0:      sets the bootloader pointer to 0, effectively opening up the bootloader region for write access
@@ -56,8 +63,8 @@ The below TIP!'s are following Adafruit's guide. So I advise to read this tips h
        TIP! I have loaded the openOCD User's guide on this Github. I strongly recommend getting the latest from their site:
             http://openocd.org/
             (Thanks openOCD for the great work!)
-            Interesting is to read about the different at91Samd commands (search in the document for the term). For example the interesting 
-            at91samd nvmuserrow command, that can help to read & reset / restore the fuses (use carefully!)
+            Interesting is to read about the different at91Samd commands (search in the document for the term). 
+            For example the interesting at91samd nvmuserrow command, that can help to read & reset / restore the fuses (use carefully!)
        TIP! Whiles trying to upload I received the message that openOCD failed to delete page x on sector y.
             I was able to resolve this issue by changing the 'SPEED_COEFF SPEED_OFFSET' in the 'raspberrypi2-native.cfg'.
             I doubled the values from 146302 36 to 292604 72. This resolved the flash clearing issue.
