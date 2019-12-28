@@ -14,6 +14,8 @@ The user should also exclude the possiblity of a malfunctioning USB driver.
 
 The use of these tricks are to the descretion of the user and to its liability only.
 (what can happen right? Even not magic smoke...)
+In any case, the bootloader can always be recovered using a debugger. If you are serious to work with the 32-bit chips, I advise to buy a debugger. On the Adafruit site, you find very affordable debuggers from Segger. Although the PI3 solution works for me, I have ordered one! The debugger gives good insight in memory, register states and allows for breakpoints.
+
 
 That said, let's get hacking!
 
