@@ -32,5 +32,35 @@ The PDF is available on this Github.
           HOWEVER, this was a mistake!! As you will notice the bootloaders are 8192byte (exactly the bootloader size). Using the wget function I got a 64kb file downloaded!! 
           > After a lot of hours searching I found out the wget will corrupt the bootloader file.
           > Therefore download the bootloader on your PC and transfer the file to the PI using ftp or in my case, PuTTY SCP (file transfer over SSH)
-      TIP! I left a working bootloader in the Github but I strongly advise to download the latest from the official Github 
+      TIP! I left a working bootloader (samd21_2020.bin) in the Github but I strongly advise to download the latest from the official Github 
+      TIP!  reset:                      resets the board
+            halt:                       halts the board
+            at91samd bootloader 0:      sets the bootloader pointer to 0, effectively opening up the bootloader region for write access
+            program samd21_sam_ba:      programs the bootloader with the 'samd21_sam_ba.bin' file, rename to your own name!
+            at91samd bootloader 8192:   sets the booltoader pointer to 8192, effectively protecting the bootloader for write access
+       TIP! I have loaded the openOCD User's guide on this Github. I strongly recommend getting the latest from their site:
+            http://openocd.org/
+            (Thanks openOCD for the great work!)
+            Interesting is to read about the different at91Samd commands (search in the document for the term). For example the interesting 
+            at91samd nvmuserrow command, that can help to read & reset / restore the fuses (use carefully!)
+       TIP! Whiles trying to upload I received the message that openOCD failed to delete page x on sector y.
+            I was able to resolve this issue by changing the 'SPEED_COEFF SPEED_OFFSET' in the 'raspberrypi2-native.cfg'.
+            I doubled the values from 146302 36 to 292604 72. This resolved the flash clearing issue.
+            I have left a copy of my 'raspberrypi2-native.cfg' in the Github.
+  
+            
+   After completing these steps, I was able to successfully load the bootloader, ie. after shutdown command the Board was, again, recognized by the PC.µ
+   This by starting it in Bootloader mode, ie. double tapping the reset button on the board.
+   
+> Burn the final firmware from the Arduino IDE
+   As a final step, I went to the all trustworthy Arduino IDE, and loaded the 'FirmwareUpdater.ino' sketch onto the board.
+   Then I ran the WiFi1010 / WiFiNINA Firmware updater program.
+   This to ensure I have the most up to date released firmware on the Arduino Board.
 
+This resolved the bootloading issue on my end and gave me confidence that I could always recover my bootloader, no matter the mess I create using this splendid board!.
+(Note that this board holds two (actually 3) processors at 48 and 400+ Mhz with a 2MB memory and WiFi compatiblity. 
+How does this compare to the trustworthy ATMega328P? Also, however, the complexity involved comes with it...)
+
+     I hope these tips & tricks can help you getting the board again to speak.
+     Keep making!
+     
