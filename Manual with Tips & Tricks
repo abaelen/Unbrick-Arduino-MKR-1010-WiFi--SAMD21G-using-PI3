@@ -1,7 +1,7 @@
 #Step-by-step manual
 This manual will describe the steps taken to upload a bootloader on a 'bricked' Arduino MKR Wifi (SAMD21G18A) using a raspberry PI3.
 
-1. As mentioned in the Readme download ane follow the steps described in: 
+1. As mentioned in the Readme download and follow the steps described in: 
 https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi
 The PDF is available on this Github.
 
