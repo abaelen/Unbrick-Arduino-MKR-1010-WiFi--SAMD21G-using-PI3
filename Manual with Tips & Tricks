@@ -1,11 +1,12 @@
 #Step-by-step manual
 This manual will describe the steps taken to upload a bootloader on a 'bricked' Arduino MKR Wifi (SAMD21G18A) using a raspberry PI3.
 
-1. As mentioned in the Readme download an follow the steps described in: 
+1. As mentioned in the Readme download ane follow the steps described in: 
 https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi
 The PDF is available on this Github.
+
 The below TIP!'s are following Adafruit's guide. So I advise to read this tips hand-in-hand with the guide provided by Adafruit.
-  > Compiling OpenOCD: just follow the steps
+> Compiling OpenOCD: just follow the steps
   > Wire up the target to SWD: 
       TIP! For the Arduino MKR 1010 Wifi find the pin connections on 
           https://gojimmypi.blogspot.com/2018/12/swd-debugging-arduino-mkr-wifi-1010.html
