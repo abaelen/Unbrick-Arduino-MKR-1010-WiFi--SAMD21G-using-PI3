@@ -1,0 +1,81 @@
+#Step-by-step manual
+This manual will describe the steps taken to upload a bootloader on a 'bricked' Arduino MKR Wifi (SAMD21G18A) using a raspberry PI3.
+
+1. As mentioned in the Readme download ane follow the steps described in: 
+https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi
+The PDF is available on this Github.
+
+The below TIP!'s are following Adafruit's guide. So I advise to read this tips hand-in-hand with the guide provided by Adafruit.
+> Compiling OpenOCD: just follow the steps
+  > Wire up the target to SWD: 
+      TIP! For the Arduino MKR 1010 Wifi find the pin connections on 
+          https://gojimmypi.blogspot.com/2018/12/swd-debugging-arduino-mkr-wifi-1010.html
+          PDF print of the webpage is available on the github.
+          (Thanks to GoJimmyPI for his contribution)
+      TIP! The wiring shown for the PI2 is the same for the PI3
+      TIP! The manual states alternatively to power the board via the raspberry. I tried both and preferred to power over USB as noticed that connection was sometime lost powering the MKR board.
+      TIP! Have left a picture of the wiring on the Github
+  > Create OpenOCD config
+      TIP! Have left my OpenOCD.cfg file on this Github.
+      TIP! Although i have changed the adapter_nsrst delay and assert, I don't think it has much impact on succesfull loading. (in my case)
+      TIP! I have entered the bcm2835gpio_swd/trst/srst pin numbering, as without it didn't work for me.
+      TIP! As an unexperienced Linux user, i have replaced all the [find xxxxxxxx] items with absolute full path names
+      TIP! I have not commented out the srst_nogate and had no issues.
+      TIP! For me the TargetName / Type / ... table did not show.
+      TIP! Running the OpenOCD was a bit of a pickle for me, as the sudo 'openOCD' command was not recognized.
+            To resolve I had to copy the openOCD.cfg and the sam21_sam_ba.bin file into openOCD's directory, ie. /openOCD/src
+              > this is done by the linux command: cp complete path/source file complete destination path
+              > to easily find files in linux, use the command find -name "openOCD.* or find -name "*raspberry*"
+                this allowed my to locate the directories in which all the relevant files resided.
+            after copying the files, changed to the /src directory (otherwise would not work):
+              pi@raspberrypi: ~ $ cd /pi/home/openOCD/src
+              pi@raspberrypi: ~/pi/home/openOCD/src $ /pi/home/openOCD/src/openOCD
+            only by running the openOCD being in his directory and using the full path to openOCD executable, it wanted to work!
+            
+      TIP! getting the xPSR.... / pc.... commands although the board is not showing or doing anything IS confirmation all went OK!
+  
+  > Opening telnet connection
+      TIP! open a new Putty screen and connect with the same username and password.
+           download the Telnet functionality using: apt-get Telnet as not standard available on my PI.
+           after installation, type telnet 127.0.0.1 4444. Leave the other screen open (without hitting CTRL+C)!
+  
+  > Burning bootloader
+      TIP! get the latest bootloader files from the Github site: 
+          https://github.com/arduino/ArduinoCore-samd (for Arduino boards).
+          (Thanks Arduino for support and sharing! That shows the added value of genuine boards!)
+      TIP! i got the latest bootloader file on my PI3 by typing into the command line: wget https://github.com/arduino/ArduinoCore-samd\https://github.com/arduino/ArduinoCore-samd/tree/master/bootloaders/mkrwifi1010/samd21_sam_ba_arduino_mkrwifi1010.bin
+          HOWEVER, this was a mistake!! As you will notice the bootloaders are 8192byte (exactly the bootloader size). Using the wget function I got a 64kb file downloaded!! 
+          > After a lot of hours searching I found out the wget will corrupt the bootloader file.
+          > Therefore download the bootloader on your PC and transfer the file to the PI using ftp or in my case, PuTTY SCP (file transfer over SSH)
+      TIP! I left a working bootloader (samd21_2020.bin) in the Github but I strongly advise to download the latest from the official Github 
+      TIP!  reset:                      resets the board
+            halt:                       halts the board
+            at91samd bootloader 0:      sets the bootloader pointer to 0, effectively opening up the bootloader region for write access
+            program samd21_sam_ba:      programs the bootloader with the 'samd21_sam_ba.bin' file, rename to your own name!
+            at91samd bootloader 8192:   sets the booltoader pointer to 8192, effectively protecting the bootloader for write access
+       TIP! I have loaded the openOCD User's guide on this Github. I strongly recommend getting the latest from their site:
+            http://openocd.org/
+            (Thanks openOCD for the great work!)
+            Interesting is to read about the different at91Samd commands (search in the document for the term). For example the interesting 
+            at91samd nvmuserrow command, that can help to read & reset / restore the fuses (use carefully!)
+       TIP! Whiles trying to upload I received the message that openOCD failed to delete page x on sector y.
+            I was able to resolve this issue by changing the 'SPEED_COEFF SPEED_OFFSET' in the 'raspberrypi2-native.cfg'.
+            I doubled the values from 146302 36 to 292604 72. This resolved the flash clearing issue.
+            I have left a copy of my 'raspberrypi2-native.cfg' in the Github.
+  
+            
+   After completing these steps, I was able to successfully load the bootloader, ie. after shutdown command the Board was, again, recognized by the PC.µ
+   This by starting it in Bootloader mode, ie. double tapping the reset button on the board.
+   
+> Burn the final firmware from the Arduino IDE
+   As a final step, I went to the all trustworthy Arduino IDE, and loaded the 'FirmwareUpdater.ino' sketch onto the board.
+   Then I ran the WiFi1010 / WiFiNINA Firmware updater program.
+   This to ensure I have the most up to date released firmware on the Arduino Board.
+
+This resolved the bootloading issue on my end and gave me confidence that I could always recover my bootloader, no matter the mess I create using this splendid board!.
+(Note that this board holds two (actually 3) processors at 48 and 400+ Mhz with a 2MB memory and WiFi compatiblity. 
+How does this compare to the trustworthy ATMega328P? Also, however, the complexity involved comes with it...)
+
+     I hope these last 5% tips & tricks can help you getting the board again to speak.
+     Keep making!
+     
