@@ -50,11 +50,10 @@ The below TIP!'s are following Adafruit's guide. So I advise to read this tips h
           HOWEVER, this was a mistake!! 
           As you will notice the bootloaders are 8192byte (exactly the bootloader size). 
           Using the wget function I got a 64kb file downloaded!! 
-          > After a lot of hours searching I found out the wget will corrupt the bootloader file.
+          > After a lot of hours searching I found out the wget command was corrupting the bootloader file.
           > Therefore download the bootloader on your PC and transfer the file to the PI using ftp or in my case, 
             PuTTY SCP (file transfer over SSH)
-      TIP! I left a working bootloader (samd21_2020.bin) in the Github but 
-           I strongly advise to download the latest from the official Github 
+      TIP! I left a working bootloader (samd21_2020.bin) in the Github but I strongly advise to download the latest from the official Github 
       TIP!  reset:                      resets the board
             halt:                       halts the board
             at91samd bootloader 0:      sets the bootloader pointer to 0, effectively opening up the bootloader region for write access
