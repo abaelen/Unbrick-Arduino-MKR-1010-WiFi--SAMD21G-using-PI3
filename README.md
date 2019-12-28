@@ -17,9 +17,11 @@ The use of these tricks are to the descretion of the user and to its liability o
 
 That said, let get hacking!
 
-The tips & tricks weigh heavily on the work of lady Ada, 'programming microcontrollers using openocd on raspberry pi'. 
-95% of the steps are found in this manual, published on webpage as well as pdf, found here:
+The tips & tricks weigh heavily on the work of Lady Ada, 'programming microcontrollers using openocd on raspberry pi'. 
+95% of the steps are found in this manual, published on webpage, you-tube as well as pdf, found here:
 https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi
+--> a big thanks for the support adafruit is providing to the community of makers! So be adviced to check their pages frequently for their valuable updates, support & learnings.
+
 
 What is this Github useful for?
  Well, providing the last 5% of tips, I was missing to get it 100% working. Provided a night spend, I wanted to share these little tips.
