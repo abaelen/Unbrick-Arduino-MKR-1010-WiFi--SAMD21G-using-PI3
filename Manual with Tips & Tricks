@@ -4,6 +4,7 @@ This manual will describe the steps taken to upload a bootloader on a 'bricked' 
 1. As mentioned in the Readme download an follow the steps described in: 
 https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi
 The PDF is available on this Github.
+The below TIP!'s are following Adafruit's guide. So I advise to read this tips hand-in-hand with the guide provided by Adafruit.
   > Compiling OpenOCD: just follow the steps
   > Wire up the target to SWD: 
       TIP! For the Arduino MKR 1010 Wifi find the pin connections on 
@@ -12,6 +13,7 @@ The PDF is available on this Github.
           (Thanks to GoJimmyPI for his contribution)
       TIP! The wiring shown for the PI2 is the same for the PI3
       TIP! The manual states alternatively to power the board via the raspberry. I tried both and preferred to power over USB as noticed that connection was sometime lost powering the MKR board.
+      TIP! Have left a picture of the wiring on the Github
   > Create OpenOCD config
       TIP! Have left my OpenOCD.cfg file on this Github.
       TIP! Although i have changed the adapter_nsrst delay and assert, I don't think it has much impact on succesfull loading. (in my case)
@@ -19,11 +21,23 @@ The PDF is available on this Github.
       TIP! As an unexperienced Linux user, i have replaced all the [find xxxxxxxx] items with absolute full path names
       TIP! I have not commented out the srst_nogate and had no issues.
       TIP! For me the TargetName / Type / ... table did not show.
+      TIP! Running the OpenOCD was a bit of a pickle for me, as the sudo 'openOCD' command was not recognized.
+            To resolve I had to copy the openOCD.cfg and the sam21_sam_ba.bin file into openOCD's directory, ie. /openOCD/src
+              > this is done by the linux command: cp complete path/source file complete destination path
+              > to easily find files in linux, use the command find -name "openOCD.* or find -name "*raspberry*"
+                this allowed my to locate the directories in which all the relevant files resided.
+            after copying the files, changed to the /src directory (otherwise would not work):
+              pi@raspberrypi: ~ $ cd /pi/home/openOCD/src
+              pi@raspberrypi: ~/pi/home/openOCD/src $ /pi/home/openOCD/src/openOCD
+            only by running the openOCD being in his directory and using the full path to openOCD executable, it wanted to work!
+            
       TIP! getting the xPSR.... / pc.... commands although the board is not showing or doing anything IS confirmation all went OK!
+  
   > Opening telnet connection
       TIP! open a new Putty screen and connect with the same username and password.
            download the Telnet functionality using: apt-get Telnet as not standard available on my PI.
            after installation, type telnet 127.0.0.1 4444. Leave the other screen open (without hitting CTRL+C)!
+  
   > Burning bootloader
       TIP! get the latest bootloader files from the Github site: 
           https://github.com/arduino/ArduinoCore-samd (for Arduino boards).
@@ -61,6 +75,6 @@ This resolved the bootloading issue on my end and gave me confidence that I coul
 (Note that this board holds two (actually 3) processors at 48 and 400+ Mhz with a 2MB memory and WiFi compatiblity. 
 How does this compare to the trustworthy ATMega328P? Also, however, the complexity involved comes with it...)
 
-     I hope these tips & tricks can help you getting the board again to speak.
+     I hope these last 5% tips & tricks can help you getting the board again to speak.
      Keep making!
      
