@@ -26,7 +26,7 @@ https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspber
 
 
 What is this Github useful for?
- Well, providing the last 5% of tips, I was missing to get it 100% working. Provided a night spend, I wanted to share these little tips.
+ Well, providing the last 5% of tips to get it to work. Provided a night spend, I wanted to share these little tips.
 
 The step-by-step with tips & tricks can be found on the github page with this readme file.
 
